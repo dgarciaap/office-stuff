@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def post
+  def new
   end
 
   def create

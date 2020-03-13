@@ -1,6 +1,6 @@
 %h1 Listing items
 
-= form_with(url: "/", method: :get) do |f|
+= form_with(url: items_path, method: :get) do |f|
   %label{for: "filter"} Filter:
   %select{id: "filter", name: "filter"}
     %option{value: "1"} Open
@@ -8,22 +8,22 @@
     %option{value: "3"} Dismiss
   = f.submit("Filter")
 
-%table
-  %tr
-    %th Name
-    %th Category
-    %th Status
-    %th Actions
-    %th Comment
-
-  - @items.each do |item|
+  %table
     %tr
-      %td= item.name
-      %td= item.category
-      %td= item.status
-      %td
-        = button_to 'Fulfill', { action: 'fulfill', id: item.id }
-        = button_to 'Dissmis', { action: 'dismiss', id: item.id }
-      %td= link_to 'Comment', '/show'
+      %th Name
+      %th Category
+      %th Status
+      %th Actions
+      %th Comment
 
-= link_to 'Post new item', '/post'
+      - @items.each do |item|
+        %tr
+          %td= item.name
+          %td= item.category
+          %td= item.status
+          %td
+            = button_to 'Fulfill', { action: 'fulfill', id: item.id }
+            = button_to 'Dissmis', { action: 'dismiss', id: item.id }
+          %td= link_to 'Comment', '/show'
+
+= link_to 'Post new item', 'items/new'
