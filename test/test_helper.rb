@@ -1,13 +1,18 @@
 ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
+require 'simplecov'
 
-class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+SimpleCov.start 'rails' do
+  SimpleCov.coverage_dir 'public/coverage'
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/vendor/'
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
+end
 
-  # Add more helper methods to be used by all tests here...
+
+SimpleCov.at_exit do
+  SimpleCov.result.format!
 end

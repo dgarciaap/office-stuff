@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   resources :items
 
-  get 'post', to: 'items#post'
-  post 'post', to: 'items#create'
   post 'fulfill', to: 'items#fulfill'
   post 'dismiss', to: 'items#dismiss'
   get 'show', to: 'items#show'
+
+  if Rails.env.development?
+    get '/coverage', :to => redirect('/coverage/index.html')
+  end
 end
