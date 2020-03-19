@@ -1,0 +1,17 @@
+.sidenav
+  .login-main-text
+    %h2 Menu Schedule
+    %p Sign up to have access
+.main
+  .col-md-6.col-sm-12
+    .login-form
+      = form_for @user do |f|
+        -#%p#login-alert= error
+        .form-group
+          = f.label :email
+          = f.text_field :email, {:class => 'form-control'}
+        .form-group
+          = f.label :password
+          = f.password_field :password, {:class => 'form-control'}
+        .actions
+          = f.submit 'Sign up', {:class => 'btn btn-desire'}
