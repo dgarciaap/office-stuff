@@ -1,0 +1,20 @@
+.sidenav
+  .login-main-text
+    %h2 Menu Schedule
+    %p Log in to have access
+.main
+  .col-md-6.col-sm-12
+    .login-form
+      = form_tag sessions_path do |form|
+        -#%p#login-alert= error
+        .form-group
+          = label_tag :email
+          = text_field_tag :email, '', class: 'form-control'
+        .form-group
+          = label_tag :password
+          = password_field_tag :password, '', class: 'form-control'
+        .actions
+          = submit_tag 'Log in', class: 'btn btn-desire'
+        .sign-link
+          %label Don't have an account yet?
+          = link_to 'Sign up', '/users/new'

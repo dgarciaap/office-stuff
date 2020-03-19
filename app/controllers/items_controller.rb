@@ -30,13 +30,17 @@ class ItemsController < ApplicationController
   end
 
   def fulfill
-    @item = Item.find_by(params[:id])
-    @item.update_attributes(:status => 'Fulfill')
+    if current_user && current_user.admin?
+      @item = Item.find_by(params[:id])
+      @item.update_attributes(:status => 'Fulfill')
+    end
   end
 
   def dismiss
-    @item = Item.find_by(params[:id])
-    @item.update_attributes(:status => 'Dismiss')
+    if current_user && current_user.admin?
+      @item = Item.find_by(params[:id])
+      @item.update_attributes(:status => 'Dismiss')
+    end
   end
   
   private
