@@ -3,8 +3,7 @@
 = form_with model: Item.new do |form|
   = form.label :name
   = form.text_field :name
-  = form.label :category
-  = form.text_field :category
+  = select(:item, :category, [['PC stuff', 'PC stuff'], ['Stationary', 'Stationary'], ['Office supplies', 'Office Supplies']])
   = form.submit "Post"
 
 = link_to 'Back', root_url

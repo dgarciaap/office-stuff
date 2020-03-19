@@ -2,6 +2,7 @@
 
 = form_with(url: items_path, method: :get) do |f|
   %label{for: "filter"} Filter:
+  -#= select(:item, :status, [['Open', 1], ['Fulfill', 2], ['Dismiss', 3]])
   %select{id: "filter", name: "filter"}
     %option{value: "1"} Open
     %option{value: "2"} Fulfill
@@ -19,7 +20,12 @@
       - @items.each do |item|
         %tr
           %td= item.name
-          %td= item.category
+          - if item.category == 'PC stuff'
+            %td{ :style => "color: purple;" }= item.category
+          - elsif item.category == 'Stationary'
+            %td{ :style => "color: blue;" }= item.category
+          - else
+            %td{ :style => "color: red;" }= item.category
           %td= item.status
           %td
             = button_to 'Fulfill', { action: 'fulfill', id: item.id }
