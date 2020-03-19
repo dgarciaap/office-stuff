@@ -9,7 +9,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 if Rails.env.development?
-  Rails.application.config.assets.paths << Rails.root.join("coverage", "assets")
+  Rails.application.config.assets.paths << Rails.root.join("public/coverage/assets")
 end
 
 # Precompile additional assets.

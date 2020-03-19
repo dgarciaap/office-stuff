@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'items#index'
 
   resources :items
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create]
 
   post 'fulfill', to: 'items#fulfill'
   post 'dismiss', to: 'items#dismiss'
