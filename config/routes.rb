@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
-  post 'fulfill', to: 'items#fulfill'
-  post 'dismiss', to: 'items#dismiss'
-  get 'show', to: 'items#show'
+  post '/items/fulfill', to: 'items#fulfill'
+  post '/items/dismiss', to: 'items#dismiss'
+  get '/show', to: 'items#show'
 
   if Rails.env.development?
     get '/coverage', :to => redirect('/coverage/index.html')

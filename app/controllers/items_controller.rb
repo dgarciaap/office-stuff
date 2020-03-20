@@ -1,12 +1,8 @@
 class ItemsController < ApplicationController
   def index
-    case params[:filter]
-    when "1"
-      @items = Item.where(:status => "Open")
-    when "2"
-      @items = Item.where(:status => "Fulfill")
-    when "3"
-      @items = Item.where(:status => "Dismiss")
+    if filter_params
+      binding.pry
+      @items = Item.where(:status => filter_params.to_i)
     else
       @items = Item.all
     end
@@ -26,25 +22,31 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by(params[:id])
+    @item = Item.find_by(id: params[:id])
   end
 
   def fulfill
-    if current_user && current_user.admin?
-      @item = Item.find_by(params[:id])
-      @item.update_attributes(:status => 'Fulfill')
+    if current_user&.admin?
+      item = Item.find_by(id: params[:id])
+      item.update(:status => 1)
+      redirect_to root_path
     end
   end
 
   def dismiss
-    if current_user && current_user.admin?
-      @item = Item.find_by(params[:id])
-      @item.update_attributes(:status => 'Dismiss')
+    if current_user&.admin?
+      @item = Item.find_by(id: params[:id])
+      @item.update(:status => 2)
+      redirect_to root_path
     end
   end
   
   private
   def item_params
     params.require(:item).permit(:name, :category)
+  end
+  
+  def filter_params
+    params[:filter]
   end
 end

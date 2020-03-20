@@ -2,34 +2,34 @@
 
 = form_with(url: items_path, method: :get) do |f|
   %label{for: "filter"} Filter:
-  -#= select(:item, :status, [['Open', 1], ['Fulfill', 2], ['Dismiss', 3]])
   %select{id: "filter", name: "filter"}
-    %option{value: "1"} Open
-    %option{value: "2"} Fulfill
-    %option{value: "3"} Dismiss
+    %option{selected: "selected", value: 3} - none -
+    %option{value: 0} Open
+    %option{value: 1} Fulfill
+    %option{value: 2} Dismiss
   = f.submit("Filter")
 
-  %table
-    %tr
-      %th Name
-      %th Category
-      %th Status
-      %th Actions
-      %th Comment
+%table
+  %tr
+    %th Name
+    %th Category
+    %th Status
+    %th Fulfill
+    %th Dismiss
+    %th Comment
 
-      - @items.each do |item|
-        %tr
-          %td= item.name
-          - if item.category == 'PC stuff'
-            %td{ :style => "color: purple;" }= item.category
-          - elsif item.category == 'Stationary'
-            %td{ :style => "color: blue;" }= item.category
-          - else
-            %td{ :style => "color: red;" }= item.category
-          %td= item.status
-          %td
-            = button_to 'Fulfill', { action: 'fulfill', id: item.id }
-            = button_to 'Dissmis', { action: 'dismiss', id: item.id }
-          %td= link_to 'Comment', '/show'
+  - @items.each do |item|
+    %tr
+      %td= item.name
+      - if item.category == 'PC stuff'
+        %td{ :style => "color: purple;" }= item.category
+      - elsif item.category == 'Stationary'
+        %td{ :style => "color: blue;" }= item.category
+      - else
+        %td{ :style => "color: red;" }= item.category
+      %td= item.status
+      %td= button_to 'Fulfill', "items/fulfill?id=#{item.id}"
+      %td= button_to 'Dissmis', "items/dismiss?id=#{item.id}"
+      %td= link_to 'Comment', '/show'
 
 = link_to 'Post new item', 'items/new'
