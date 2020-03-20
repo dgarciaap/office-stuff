@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   def index
     if filter_params
-      binding.pry
       @items = Item.where(:status => filter_params.to_i)
     else
       @items = Item.all
