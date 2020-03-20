@@ -1,12 +1,13 @@
 %h1 Listing items
 
--#= form_with(url: items_path, method: :get) do |f|
-  -#%label{for: "filter"} Filter:
-  -#%select{id: "filter", name: "filter"}
-    -#%option{value: 'open'} Open
-    -#%option{value: 'fulfill'} Fulfill
-    -#%option{value: 'dismiss'} Dismiss
-  -#= f.submit("Filter")
+= form_with(url: items_path, method: :get) do |f|
+  %label{for: "filter"} Filter:
+  %select{id: "filter", name: "filter"}
+    %option{selected: "selected", value: 3} - none -
+    %option{value: 0} Open
+    %option{value: 1} Fulfill
+    %option{value: 2} Dismiss
+  = f.submit("Filter")
 
 %table
   %tr
@@ -27,8 +28,8 @@
     - else
       %td{ :style => "color: red;" }= item.category
     %td= item.status
-    %td= link_to 'Fulfill', "items/fulfill?id=#{item.id}"
-    %td= link_to 'Dissmis', "items/dismiss?id=#{item.id}"
+    %td= button_to 'Fulfill', "items/fulfill?id=#{item.id}"
+    %td= button_to 'Dissmis', "items/dismiss?id=#{item.id}"
     %td= link_to 'Comment', '/show'
 
 = link_to 'Post new item', 'items/new'

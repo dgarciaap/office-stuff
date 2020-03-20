@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def index
-    if !filter_params.empty?
-      @items = Item.where(:status => filter_params)
+    if filter_params
+      @items = Item.where(:status => filter_params.to_i)
     else
       @items = Item.all
     end
@@ -25,19 +25,19 @@ class ItemsController < ApplicationController
   end
 
   def fulfill
-    #if current_user && current_user.admin?
+    if current_user && current_user.admin?
       item = Item.find_by(id: params[:id])
-      item.update(:status => 'fulfill')
+      item.update(:status => 1)
       redirect_to root_path
-    #end
+    end
   end
 
   def dismiss
-    #if current_user && current_user.admin?
-      item = Item.find_by(id: params[:id])
-      item.update(:status => 'dismiss')
-      redirect_to rooth_path
-    #end
+    if current_user&.admin?
+      @item = Item.find_by(id: params[:id])
+      @item.update(:status => 2)
+      redirect_to root_path
+    end
   end
   
   private
