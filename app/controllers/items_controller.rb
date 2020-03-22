@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     if filter_params
       @items = Item.where(:status => filter_params.to_i)
@@ -14,7 +16,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
-      redirect_to root_url
+      UserMailer.item_creation(current_user).deliver_later
+      redirect_to items_path
     else
       render 'new'
     end
@@ -26,9 +29,10 @@ class ItemsController < ApplicationController
 
   def fulfill
     if current_user&.admin?
-      item = Item.find_by(id: params[:id])
-      item.update(:status => 1)
-      redirect_to root_path
+      @item = Item.find_by(id: params[:id])
+      @item.update(:status => 1)
+      UserMailer.status_change(current_user).deliver_later
+      redirect_to items_path
     end
   end
 
@@ -36,7 +40,8 @@ class ItemsController < ApplicationController
     if current_user&.admin?
       @item = Item.find_by(id: params[:id])
       @item.update(:status => 2)
-      redirect_to root_path
+      UserMailer.status_change(current_user).deliver_later
+      redirect_to items_path
     end
   end
   
