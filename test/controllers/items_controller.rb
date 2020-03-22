@@ -1,19 +1,19 @@
 require 'test_helper'
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
-  test 'should get root' do
-    get root_url
+  test 'should get items' do
+    get items_path
     assert_response :success
     assert_select 'title','OfficeStuff'
   end
 
-  test 'should get post' do
-    get '/post'
+  test 'should get new item' do
+    get new_item_url
     assert_response :success
   end
 
   test 'should get show' do
-    get '/post'
+    get '/show'
     assert_response :success
   end
 end
