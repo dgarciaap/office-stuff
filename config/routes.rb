@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   root 'sessions#new'
 
-  resources :items
+  resources :items do
+    resources :comments
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
   post '/items/fulfill', to: 'items#fulfill'
   post '/items/dismiss', to: 'items#dismiss'
-  get '/show', to: 'items#show'
 
   get '/logout', to: 'sessions#destroy'
 

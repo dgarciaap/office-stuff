@@ -1,1 +1,32 @@
-%h1 Items
+%p
+  %strong Name
+  = @item.name
+%p
+  %strong Category
+  = @item.category
+%p
+  %strong Status
+  = @item.status
+
+%h2 Comments
+= @item.comments.each do |comment|
+  %p
+    %strong Commenter:
+    = comment.commenter
+  %p
+    %strong Comment:
+    = comment.body
+  %p ----------------------
+
+%h2 Add a comment:
+= form_with(model: [ @item, @item.comments.build ], local: true) do |form|
+  %p
+    = form.label :commenter
+    = form.text_field :commenter
+  %p
+    = form.label :body
+    = form.text_field :body
+  %p
+    = form.submit
+
+= link_to 'Back', items_path
