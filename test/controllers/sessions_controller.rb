@@ -15,7 +15,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post sessions_path, params: { session: { email: @user.email, password: @user.password } }
-    follow_redirect!
     assert_response :success
   end
 
