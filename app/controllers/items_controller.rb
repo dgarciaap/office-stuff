@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
-      UserMailer.item_creation(current_user).deliver_later
+      NewItemJob.perform_now(current_user.email)
       redirect_to items_path
     else
       render 'new'
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     if current_user&.admin?
       @item = Item.find_by(id: params[:id])
       @item.update(:status => 1)
-      UserMailer.status_change(current_user).deliver_later
+      StatusChangeJob.perform_now(current_user.email, @item)
       redirect_to items_path
     end
   end
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
     if current_user&.admin?
       @item = Item.find_by(id: params[:id])
       @item.update(:status => 2)
-      UserMailer.status_change(current_user).deliver_later
+      StatusChangeJob.perform_now(current_user.email, @item)
       redirect_to items_path
     end
   end
