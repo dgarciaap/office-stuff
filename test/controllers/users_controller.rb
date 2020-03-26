@@ -24,6 +24,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post users_path, params: { user: { email: '', password: '' } }
-    assert_template 'users/new'
+    assert_template :new
   end
 end
