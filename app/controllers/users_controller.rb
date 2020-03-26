@@ -11,8 +11,6 @@ class UsersController < ApplicationController
 
       redirect_to root_url
     else
-      flash[:alert] = 'User was not saved.'
-
       render 'new'
     end
   end
