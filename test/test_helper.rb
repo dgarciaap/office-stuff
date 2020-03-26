@@ -11,6 +11,7 @@ SimpleCov.start 'rails' do
   add_filter '/helpers'
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
+  add_group 'Services', 'app/services'
 
   SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 end
