@@ -27,6 +27,41 @@
           null
         ]
       },
+      "/home/diana/Desktop/office-stuff/app/mailers/user_mailer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/diana/Desktop/office-stuff/app/mailers/application_mailer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/home/diana/Desktop/office-stuff/app/controllers/users_controller.rb": {
         "lines": [
           1,
@@ -41,8 +76,6 @@
           3,
           null,
           3,
-          null,
-          0,
           null,
           0,
           null,
@@ -110,6 +143,28 @@
           null
         ]
       },
+      "/home/diana/Desktop/office-stuff/app/jobs/new_item_job.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/diana/Desktop/office-stuff/app/jobs/application_job.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/diana/Desktop/office-stuff/app/models/comment.rb": {
         "lines": [
           1,
@@ -147,17 +202,6 @@
           null
         ]
       },
-      "/home/diana/Desktop/office-stuff/app/jobs/application_job.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
       "/home/diana/Desktop/office-stuff/app/services/new_comment_email_service.rb": {
         "lines": [
           1,
@@ -166,52 +210,6 @@
           1,
           1,
           null,
-          null,
-          null
-        ]
-      },
-      "/home/diana/Desktop/office-stuff/app/mailers/user_mailer.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/diana/Desktop/office-stuff/app/mailers/application_mailer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/diana/Desktop/office-stuff/app/jobs/new_item_job.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
           null,
           null
         ]
@@ -292,7 +290,7 @@
         }
       }
     },
-    "timestamp": 1585265804
+    "timestamp": 1585336770
   },
   "Unit Tests": {
     "coverage": {
