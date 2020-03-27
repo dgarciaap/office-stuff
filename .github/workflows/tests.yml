@@ -3,7 +3,7 @@ name: Rails Tests
 on: [pull_request, push]
 jobs:
   test:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     services:
       db:
         image: postgres
