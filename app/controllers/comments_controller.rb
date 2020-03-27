@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @comment = @item.comments.create(comment_params)
-    UserMailer.new_comment(current_user, @item).deliver_later
+    NewCommentJob.perform_later(current_user.email, @item)
     redirect_to item_path(@item)
   end
 

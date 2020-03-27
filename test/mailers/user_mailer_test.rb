@@ -6,23 +6,35 @@ class UserMailerTest < ActionMailer::TestCase
     @item = Item.create(name: 'froggy chair', category: 'Stationary')
   end
 
-  test 'item_creation' do
-    email = UserMailer.item_creation(@user).deliver
+  test 'jobs are being enqueued' do
+    assert_equal 0, Sidekiq::Queues['default'].size
+    Sidekiq::Client.push(
+      'class' => 'UserMailer',
+      'queue' => 'default',
+      'args' => [1]
+    )
+    assert_equal 1, Sidekiq::Queues['default'].size
+    assert_equal 'UserMailer', Sidekiq::Queues['default'].first['class']
+    Sidekiq::Queues['default'].clear
+  end
 
+  test 'item_creation is sent' do
+    email = UserMailer.with(user: @user).item_creation
+    email.to = @user.email
     assert_emails 1 do
-      email.deliver
+      email.deliver_now
     end
 
     assert_equal ['diana.garcia@tangosource.com'], email.from
-    assert_equal User.admin.pluck(:email), email.to
+    assert_equal [@user.email], email.to
     assert_equal 'An item has been posted', email.subject
   end
 
-  test 'status change' do
-    email = UserMailer.status_change(@user).deliver
-
+  test 'status_change is sent' do
+    email = UserMailer.with(user: @user, item: @item).status_change
+    email.to = @user.email
     assert_emails 1 do
-      email.deliver
+      email.deliver_now
     end
 
     assert_equal ['diana.garcia@tangosource.com'], email.from
@@ -30,11 +42,11 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal 'Item status has changed', email.subject
   end
 
-  test 'new comment in a certain item' do
-    email = UserMailer.new_comment(@user, @item).deliver
-
+  test 'new_comment is sent' do
+    email = UserMailer.with(user: @user, item: @item).new_comment
+    email.to = @user.email
     assert_emails 1 do
-      email.deliver
+      email.deliver_now
     end
 
     assert_equal ['diana.garcia@tangosource.com'], email.from
