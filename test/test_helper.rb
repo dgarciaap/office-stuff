@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 require 'sidekiq/testing'
+require 'knapsack_pro'
 
 SimpleCov.start 'rails' do
   SimpleCov.coverage_dir 'public/coverage'
@@ -12,6 +13,9 @@ SimpleCov.start 'rails' do
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
   add_group 'Services', 'app/services'
+
+  knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
+  knapsack_pro_adapter.set_test_helper_path(__FILE__)
 
   SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 end

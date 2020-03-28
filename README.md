@@ -1,24 +1,2 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[![Knapsack Pro Parallel CI builds for Minitest tests](https://img.shields.io/badge/Knapsack%20Pro-Parallel%20%2F%20Minitest%20tests-%230074ff)](https://knapsackpro.com/dashboard/organizations/937/projects/893/test_suites/1285/builds?utm_campaign=organization-id-937&utm_content=test-suite-id-1285&utm_medium=readme&utm_source=knapsack-pro-badge&utm_term=project-id-893)
