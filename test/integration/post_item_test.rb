@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PostItemTest < ActionDispatch::IntegrationTest
   def setup
-    @user = User.new(email: 'dg38828@gmail.com', password: '1223', role: 1)
+    @user = User.create(email: 'dg38828@gmail.com', password: '1223', role: 1)
     @item = Item.create(name: 'froggy chair', category: 'Stationary')
     post users_path, params: { user: { email: @user.email,
 					     password: @user.password } }
