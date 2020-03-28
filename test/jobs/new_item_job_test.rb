@@ -4,7 +4,7 @@ class NewItemJobTest < ActiveJob::TestCase
   include ActionMailer::TestHelper
 
   def setup
-    @user = User.create(email: 'dg@gmail.com', password: '1234')
+    @user = User.create(email: 'dg38828@gmail.com', password: '1234', role: 1)
   end
 
   test 'job is performed' do
