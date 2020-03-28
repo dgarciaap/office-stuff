@@ -45,16 +45,6 @@ jobs:
           cmd: install
       - name: Install pg client
         run: sudo apt-get install libpq-dev
-      #- name: Build
-        #env:
-          #DATABASE_URL: postgres://postgres:@localhost:5432/test
-          #REDIS_URL: redis://localhost:6379/0
-          #RAILS_ENV: test
-        #run: |
-          #gem install bundler
-          #bundle install --jobs 4 --retry 3
-          #bundle exec rails db:prepare
-          #bundle exec rails webpacker:compile
       - name: Run tests
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
