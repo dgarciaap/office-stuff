@@ -1,12 +1,6 @@
 name: Rails Tests
 
-on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
+on: [pull_request, push]
 jobs:
   test:
     runs-on: ubuntu-latest
