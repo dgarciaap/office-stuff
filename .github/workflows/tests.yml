@@ -49,7 +49,7 @@ jobs:
           REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          KNAPSACK_PRO_TEST_SUITE_TOKEN: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN }} 
+          KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }} 
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total  }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index  }}
         run: |
