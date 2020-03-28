@@ -3,7 +3,7 @@ require 'knapsack_pro'
 ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 #require 'sidekiq/testing'
-require 'rails/test_help'
+#require 'rails/test_help'
 
 knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
 knapsack_pro_adapter.set_test_helper_path(__FILE__)
