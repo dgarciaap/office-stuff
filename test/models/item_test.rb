@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
   def setup
-    @item = Item.new(name: 'Computer cleaner', category: 'PC stuff')
+    @item = Item.create(name: 'Computer cleaner', category: 'PC stuff')
   end
 
   test 'valid item with arguments' do
@@ -10,7 +10,7 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'invalid item without arguments' do
-    item = Item.new
+    item = Item.create
     assert_not item.valid?
   end
 
