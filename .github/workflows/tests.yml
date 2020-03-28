@@ -43,18 +43,30 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
-      - name: Build and run tests
+      - name: Install pg client
+        run: sudo apt-get install libpq-dev
+      - name: Build
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
           REDIS_URL: redis://localhost:6379/0
+          RAILS_ENV: test
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:prepare
+          yarn install --check-files
+          bundle exec rails webpacker:compile
+      - name: Run tests
+        env:
+          #DATABASE_URL: postgres://postgres:@localhost:5432/test
+          #REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }} 
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total  }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index  }}
         run: |
-          sudo apt-get -yqq install libpq-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-          bundle exec rails db:prepare
+          #gem install bundler
+          #bundle install --jobs 4 --retry 3
+          #bundle exec rails db:prepare
           bundle exec rake knapsack_pro:minitest
