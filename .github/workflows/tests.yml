@@ -28,8 +28,14 @@ jobs:
         ports: ['6379:6379']
         options: --entrypoint redis-server
 
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_node_total: [2]
+        ci_node_index: [0, 1]
+
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
@@ -37,15 +43,19 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
-      - name: Build and run tests
+      - name: Install pg client
+        run: sudo apt-get install libpq-dev
+      - name: Run tests
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
           REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }} 
+          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total  }}
+          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index  }}
         run: |
-          sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
-          bundle exec rails test
+          bundle exec rake knapsack_pro:minitest

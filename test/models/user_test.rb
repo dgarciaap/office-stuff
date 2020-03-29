@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(email: 'dg38828@gmail.com', password: '1234')
+    @user = User.create(email: 'dg38828@gmail.com', password: '1234')
   end
 
   test 'valid user with arguments' do
@@ -10,7 +10,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'invalid user without arguments' do
-    user = User.new
+    user = User.create
     assert_not user.valid?
   end
 
