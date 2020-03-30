@@ -1,3 +1,4 @@
 gmail_username: 'diana.garcia@tangosource.com'
 gmail_password: 'diamantinatina03'
 REDIS_URL: 'redis://localhost'
+REDISTOGO_URL: 'redis://redistogo:09125ae4b677af707b4601249a57f91d@spinyfin.redistogo.com:10480/'
