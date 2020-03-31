@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
   def index
     if filter_params
       @items = Item.where(status: filter_params.to_i)
+    elsif cat_params
+      @items = Item.where(category: cat_params)
     else
       @items = Item.all
     end
@@ -52,5 +54,9 @@ class ItemsController < ApplicationController
   
   def filter_params
     params[:filter]
+  end
+
+  def cat_params
+    params[:cat_filter]
   end
 end

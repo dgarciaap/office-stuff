@@ -37,6 +37,24 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'items get filtered by pc stuff category' do
+    get items_path
+    assert_select('select#cat_filter option[selected]').first['value']
+    get '/items?cat_filter=PC+stuff&commit=Filter'
+  end
+
+  test 'items get filtered by stationary category' do
+    get items_path
+    assert_select('select#cat_filter option[selected]').first.next['value']
+    get '/items?cat_filter=Stationary&commit=Filter'
+  end
+
+  test 'items get filtered by office supplies category' do
+    get items_path
+    assert_select('select#cat_filter option[selected]').last['value']
+    get '/items?cat_filter=OfficeSupplies&commit=Filter'
+  end
+
   test 'admin user changes an item to fulfill' do
     get items_path
     post "/items/fulfill?id=#{@item.id}"
