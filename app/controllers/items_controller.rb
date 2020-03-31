@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     if filter_params
-      @items = Item.where(:status => filter_params.to_i)
+      @items = Item.where(status: filter_params.to_i)
     else
       @items = Item.all
     end

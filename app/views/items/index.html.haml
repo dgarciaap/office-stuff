@@ -1,7 +1,7 @@
 %h1 Listing items
 = link_to 'Log out', '/logout'
 
-= form_with(url: items_path, method: :get) do |f|
+= form_with(url: items_path, method: :get, local: true) do |f|
   %label{for: 'filter'} Filter:
   %select{id: 'filter', name: 'filter'}
     %option{selected: 'selected', value: 3} - none -
