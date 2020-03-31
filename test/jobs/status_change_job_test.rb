@@ -5,7 +5,8 @@ class StatusChangeJobTest < ActiveJob::TestCase
 
   def setup
     @user = User.create(email: 'dg@gmail.com', password: '1234')
-    @item = Item.create(name: 'frog', category: 'Stationary')
+    owner = User.create(email: 'diana.garcia@gmail.com', password: 'abcd')
+    @item = Item.create(name: 'frog', category: 'Stationary', user_id: owner.id)
   end
 
   test 'job is performed' do

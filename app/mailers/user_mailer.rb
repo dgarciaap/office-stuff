@@ -11,13 +11,13 @@ class UserMailer < ApplicationMailer
     @email = params[:email]
     @item = params[:item]
     @url = "http://localhost:3000/items/#{@item.id}"
-    mail(to: @email, subject: 'Item status has changed')
+    mail(to: @item.user.email, subject: 'Item status has changed')
   end
 
   def new_comment
     @email = params[:email]
     @item = params[:item]
     @url = "http://localhost:3000/items/#{@item.id}"
-    mail(to: @email, subject: 'New comment on your post')
+    mail(to: @item.user.email, subject: 'New comment on your post')
   end
 end
