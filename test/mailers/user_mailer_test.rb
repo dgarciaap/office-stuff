@@ -4,7 +4,8 @@ require 'sidekiq/testing'
 class UserMailerTest < ActionMailer::TestCase
   def setup
     @user = User.create(email: 'dg38828@gmail.com', password: '1223', role: 1)
-    @item = Item.create(name: 'froggy chair', category: 'Stationary')
+    owner = User.create(email: 'diana.garcia@tangosource.com', password: '1234')
+    @item = Item.create(name: 'froggy chair', category: 'Stationary', user_id: owner.id )
   end
 
   test 'jobs are being enqueued' do
@@ -33,25 +34,25 @@ class UserMailerTest < ActionMailer::TestCase
 
   test 'status_change is sent' do
     email = UserMailer.with(user: @user, item: @item).status_change
-    email.to = @user.email
+    email.to = @item.user.email
     assert_emails 1 do
       email.deliver_now
     end
 
     assert_equal ['diana.garcia@tangosource.com'], email.from
-    assert_equal [@user.email], email.to
+    assert_equal [@item.user.email], email.to
     assert_equal 'Item status has changed', email.subject
   end
 
   test 'new_comment is sent' do
     email = UserMailer.with(user: @user, item: @item).new_comment
-    email.to = @user.email
+    email.to = @item.user.email
     assert_emails 1 do
       email.deliver_now
     end
 
     assert_equal ['diana.garcia@tangosource.com'], email.from
-    assert_equal [@user.email], email.to
+    assert_equal [@item.user.email], email.to
     assert_equal 'New comment on your post', email.subject
   end
 end

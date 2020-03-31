@@ -2,7 +2,8 @@ require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
   def setup
-    item = Item.create(name: 'Froggy chair', category: 'Stationary')
+    user = User.create(email: 'dg@gmail.com', password: '1234')
+    item = Item.create(name: 'Froggy chair', category: 'Stationary', user_id: user.id)
     @comment = Comment.create(commenter: 'Diana', body: 'I agree', item_id: item.id)
   end
 
