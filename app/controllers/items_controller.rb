@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new(name: item_params[:name], category: item_params[:category], user_id: current_user.id)
 
     if @item.save
       NewItemJob.perform_later(current_user.email)
