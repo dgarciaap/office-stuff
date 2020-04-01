@@ -2,12 +2,21 @@
 = link_to 'Log out', '/logout'
 
 = form_with(url: items_path, method: :get, local: true) do |f|
-  %label{for: 'filter'} Filter:
+  %label{for: 'filter'} Status:
   %select{id: 'filter', name: 'filter'}
     %option{selected: 'selected', value: 3} - none -
     %option{value: 0} Open
     %option{value: 1} Fulfill
     %option{value: 2} Dismiss
+  = f.submit('Filter')
+
+= form_with(url: items_path, method: :get, local: true) do |f|
+  %label{for: 'cat_filter'} Category:
+  %select{id: 'cat_filter', name: 'cat_filter'}
+    %option{selected: 'selected'} - none -
+    %option{value: 'PC stuff'} PC stuff
+    %option{value: 'Stationary'} Stationary
+    %option{calue: 'Office Supplies'} Office Supplies
   = f.submit('Filter')
 
 %table
