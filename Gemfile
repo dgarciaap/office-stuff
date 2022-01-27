@@ -33,7 +33,7 @@ gem 'simplecov', require: false, group: :test
 
 gem 'pry', '~> 0.12.2'
 
-gem 'sidekiq', '5.2.7'
+gem 'sidekiq', '6.4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
